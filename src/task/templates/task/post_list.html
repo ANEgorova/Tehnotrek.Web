@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}СПИСОК ПОСТОВ:{% endblock %}
+
+{% block text %}
+{% for post in object_list %}
+<div>
+<div>Title:  {{ post.title }}</div>
+<div>Desc:   {{ post.text }}</div>
+<div>Date:   {{post.pub_data}}</div>
+    <br>
+</div>
+{% endfor %}
+{% endblock %}

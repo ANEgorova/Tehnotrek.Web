@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}СПИСОК ПОСТОВ:{% endblock %}
+{% block title %}<b>TASKS LIST:</b> {% endblock %}
 
 {% block text %}
+<form method="get" action="./newtask/">
+    <input type="submit" value="Create new task">
+</form>
+
 {% for post in object_list %}
 <div>
-<div>Title:  {{ post.title }}</div>
-<div>Desc:   {{ post.text }}</div>
-<div>Date:   {{post.pub_data}}</div>
+<div><b>Author:</b> {{ post.author }}</div>
+<div><b>Title:</b>  {{ post.title }}</div>
+<div><b>Desc:</b>   {{ post.text }}</div>
+<div><b>Date:</b>   {{ post.pub_data }}</div>
     <br>
 </div>
 {% endfor %}

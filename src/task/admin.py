@@ -1,9 +1,8 @@
 from django.contrib import admin
 
-from .models import Post, Star, Participant, Comment
+from .models import Task, Star, Comment
 
-admin.site.register(Post)
+admin.site.register(Task)
 admin.site.register(Star)
-admin.site.register(Participant)
 admin.site.register(Comment)
 

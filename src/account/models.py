@@ -9,4 +9,6 @@ class User(AbstractUser):
     avatar = models.FileField(upload_to='avatars', blank=True, null=True)
     text = models.TextField(max_length=255, null=True)
     friends = models.ManyToManyField('self')
-    # task we can get from task.Participants
+    done_tasks = models.IntegerField(default=0)
+    will_do_task = models.IntegerField(default=0)
+

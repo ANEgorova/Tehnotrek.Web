@@ -16,10 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^users/', include('account.urls')),
-    url(r'^tasks/', include('task.urls')),
+    url(r'^users/', include('account.urls', namespace='accounts')),
+    url(r'^tasks/', include('task.urls', namespace='tasks')),
+    url(r'^', include('core.urls', namespace='main page')),
 ]
 
 

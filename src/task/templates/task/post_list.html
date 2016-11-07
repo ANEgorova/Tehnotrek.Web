@@ -2,13 +2,13 @@
 
 {% block title %}<b>TASKS LIST:</b> {% endblock %}
 
-{% block text %}
-<form method="get" action="./newtask/">
-    <input type="submit" value="Create new task">
-</form>
-
+{% block text %}<br>
+<a href="./newtask/">Create new task</a>
+<!--<form method="get" action="./newtask/">-->
+    <!--<input type="submit" value="Create new task">-->
+<!--</form>-->
 {% for post in object_list %}
-<div>
+<div> <br>
 <div><b>Author:</b> {{ post.author }}</div>
 <div><b>Title:</b>  {{ post.title }}</div>
 <div><b>Desc:</b>   {{ post.text }}</div>

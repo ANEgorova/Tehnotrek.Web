@@ -7,10 +7,15 @@ from django import forms
 
 
 class CreateTask(forms.Form):
-    title = forms.CharField()
+    title = forms.CharField(label='Task Title')
     #  tags = forms ?? What field?
-    text = forms.CharField(widget=forms.Textarea)
+    text = forms.CharField(widget=forms.Textarea, label='Task Description')
     status = forms.ChoiceField(choices=(('DN', 'Do now'), ('WD', 'Will do')))
+
+    def clean_data(self):
+        text = self.cleaned_data['text']
+        title = self.cleaned_data['title']
+        #  Errors
 
 
 def CreateTaskView(request):
@@ -47,11 +52,4 @@ class AllPostsView(ListView):
         form = CreateTask()
         context['form'] = form
         return context
-
-    def get_button(self, **kwargs):
-        context = super(AllPostsView, self).get_button(**kwargs)
-        button = CreateTaskButton()
-        context['form'] = button
-        return context
-
 

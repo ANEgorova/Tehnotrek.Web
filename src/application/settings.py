@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'task',
     'account',
     'core',
+    'application',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,5 @@ STATIC_ROOT = '/home/alyona/Technotrack/collected_static/'
 STATICFILES_DIRS = ('/home/alyona/Technotrack/src/static/', )
 
 AUTH_USER_MODEL = 'account.User'
+LOGIN_URL = '/'  # Create "You are not login" page!!!!?????
+LOGIN_REDIRECT_URL = '/tasks/'

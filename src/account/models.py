@@ -5,8 +5,10 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    name = models.CharField(max_length=255, unique=True, null=True)
-    avatar = models.FileField(upload_to='avatars', blank=True, null=True)
+    name = models.CharField(max_length=255, unique=False, null=True)
+    username = models.CharField(max_length=255, unique=True, null=True)
+    email = models.EmailField()
+    avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
     text = models.TextField(max_length=255, null=True)
     friends = models.ManyToManyField('self')
     done_tasks = models.IntegerField(default=0)

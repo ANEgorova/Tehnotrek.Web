@@ -4,7 +4,9 @@ from .views import *
 
 
 urlpatterns = [
-    url(r'^(?P<pk>\d+)/$', login_required(OnePostView.as_view()), name='one-post-detail'),
+    #  url(r'^(?P<pk>\d+)/$', login_required(OnePostView.as_view()), name='one-post-detail'),
+    url(r'^(?P<pk>\d+)/$', login_required(TaskView.as_view()), name='task-view'),
     url(r'newtask/$', login_required(CreateTaskView), name='new-task'),
+    url(r'mytask/$', login_required(UserTasksView.as_view()), name='user-task'),
     url(r'$', login_required(AllPostsView.as_view()), name='all-posts-detail'),
 ]

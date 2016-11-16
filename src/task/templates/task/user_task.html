@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %} {{ user }}'s tasks <br> {% endblock %}
+
+{% block text %}
+    <form method="get">
+{% for task in object_list %}
+<li>
+    {{task.title}}
+    {{task.text}}
+
+</li>{% endfor %}
+    </form>
+{% endblock %}

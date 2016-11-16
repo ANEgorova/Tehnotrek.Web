@@ -1,9 +1,17 @@
-{% block title %} Please, log or sign in{% endblock %}
+{% extends "base.html" %}
 
-{% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="log in">
-    </form>
+{% block text %}
+<p><b>Welcome, everybody! </b></p>
+<p><b>There is a place where people are trying to be as productive and motivated as they can </b></p>
+Please Log in to use our website!
+<form method="post">
+    {% csrf_token %}
+    {{ form  }}
+    <input type="submit" value="log in">
+</form>
+
+Do you still not have an account?
+<form method="get" action="../join">
+    <input type="submit" value="Sign up">
+</form>
 {% endblock %}

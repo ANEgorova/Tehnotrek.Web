@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}<b>Welcom, new user</b> {% endblock %}
+
+{% block text %}
+{{ form.errors }}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>{{form.email.label_tag}} {{form.email}}</div>
+    <br>
+    <div>{{form.name.label_44444tag}} {{form.name}}</div>
+    <br>
+    <div>{{form.username.label_tag}} {{form.username}}</div>
+    <div>{{form.avatar.label_tag}} {{form.avatar}}</div>
+    <br>
+    <div>{{form.password1}}</div>
+    <br>
+    <div>{{form.password2}}</div>
+    <input type="submit" value="Join">
+</form>
+{% endblock %}

@@ -124,8 +124,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/alyona/Technotrack/collected_static/'
-STATICFILES_DIRS = ('/home/alyona/Technotrack/src/static/', )
+STATICFILES_DIRS = ('/home/alyona/Technotrack/src/static/',)
+
+IMAGE_URL = '/media/'
+IMAGE_ROOT = '/home/alyona/Technotrack/src/avatars/'
 
 AUTH_USER_MODEL = 'account.User'
-LOGIN_URL = '/'  # Create "You are not login" page!!!!?????
+LOGIN_URL = '/users/login/'  # Create "You are not login" page!!!!?????
 LOGIN_REDIRECT_URL = '/tasks/'

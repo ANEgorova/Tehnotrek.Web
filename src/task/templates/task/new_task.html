@@ -6,16 +6,19 @@
 {{ form.errors }}
 <form method="post">
     {% csrf_token %}
+
     <div>{{form.title.label_tag}} {{form.title}}</div>
     {% if form.title.errors %}
     <b> error</b>
     {% endif %}
     <br>
+
     <div>{{form.text.label_tag}} {{form.text}}</div>
     {% if form.text.errors %}
     <b> error </b>
     {% endif %}
     <br>
+
     <div>{{form.status.label_tag}} {{form.status}}</div>
     <br>
     <input type="submit" value="Create task">

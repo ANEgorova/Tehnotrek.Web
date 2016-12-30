@@ -6,6 +6,9 @@ from django.views.generic.list import ListView
 from .models import Task
 from django import forms
 
+import logging
+logger = logging.getLogger('task.view')
+
 
 #  Form for creating new task
 class CreateTask(forms.Form):
@@ -16,7 +19,8 @@ class CreateTask(forms.Form):
 
 
 #  Function to create new task
-def CreateTaskView(request):
+def create_task_view(request):
+    logger.debug("Debug!")
     if request.method == 'POST':
         form = CreateTask(request.POST)
         if form.is_valid():
@@ -32,12 +36,6 @@ def CreateTaskView(request):
     else:
         form = CreateTask()
     return render(request, 'task/new_task.html', {'form': form})
-
-
-# class OnePostView(DetailView):
-#     model = Task
-#     slug_field = 'id'
-#     template_name = 'post.html'
 
 
 #  View to see all tasks of all users
@@ -57,7 +55,7 @@ class AllPostsView(ListView):
 class TaskView(UpdateView):
     model = Task
     slug_field = 'id'
-    template_name = 'task/task.html'
+    template_name = 'task/edit_task.html'
     fields = (
         'title',
         'text',
@@ -68,8 +66,9 @@ class TaskView(UpdateView):
         return reverse('tasks:all-posts-detail')
 
 
+#  View for observing tasks from one person
 class UserTasksView(ListView):
-    template_name = 'task/user_task.html'
+    template_name = 'task/user_tasks.html'
     model = Task
 
     def get_queryset(self):
@@ -79,3 +78,16 @@ class UserTasksView(ListView):
         return qs
 
 
+class FilterForm(forms.Form):
+    tasks = forms.ModelChoiceField(Task.objects.all())
+    #  filter_key = forms.ModelChoiceField(choices=(('AN', 'Author name'),
+    #  ('D', 'Date'), ('TT', 'Task Title'), ('S', 'Status')))
+
+
+def view_filter(request):
+
+    def sort_by_date(self):
+        tasks_by_name = Task.objects.order_by('pub_data')
+
+    filter_form = FilterForm()
+    return render(request, 'task/filter_task.html', {'form': filter_form})

@@ -1,25 +1,56 @@
-{% extends "base.html" %}
-
-{% block title %}<b>TASKS LIST:</b> {% endblock %}
-
-{% block text %}<br>
-<a href="./newtask/">Create new task</a>
-<!--<form method="get" action="./newtask/">-->
-    <!--<input type="submit" value="Create new task">-->
-<!--</form>-->
-<form method="get" action="/users/login">
-    <input type="submit" value="Logout">
-</form>
-{% for post in object_list %}
-<div> <br>
-<div><b>Author:</b> {{ post.author }}</div>
-    {% if post.author == user %}
-    <a href="{% url 'tasks:task-view' pk=post.id%}">Edit</a>
-    {% endif %}
-<div><b>Title:</b>  {{ post.title }}</div>
-<div><b>Desc:</b>   {{ post.text }}</div>
-<div><b>Date:</b>   {{ post.pub_data }}</div>
-    <br>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
+          integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi"
+          crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"
+            integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK"
+            crossorigin="anonymous"></script>
+</head>
+<div class="container">
+    <div class="row flex-items-xs-middle">
+        <div class="col-xs-4">
+            <img src="/static/label.png" class="img-thumbnail" alt="Site label" width="140" height="92">
+        </div>
+        <div class="col-xs-3">
+            <a class="btn btn-primary" href="./newtask/" role="button">Create new task</a>
+        </div>
+        <div class="col-xs-3">
+            <a href="./mytasks/">My tasks</a>
+            <div>{{filter_form}}</div>
+            <br>
+        </div>
+        <div class="col-xs-2">
+            Hi, {{ user.name }}
+            <form method="post" action="{% url "accounts:logout" %}">
+                  {% csrf_token %}
+                <input type="submit" value="Logout">
+            </form>
+        </div>
+    </div>
 </div>
+
+<br>
+{% block title %}<b>TASKS LIST:</b> {% endblock %}
+<br>
+{% for post in object_list %}
+<div class="media">
+    <a class="media-left" href="#">
+        <img class="media-object" src="/static/avatar.jpg" alt="Taskholder image" width="60"
+             height="50">
+    </a>
+    <div class="media-body">
+        <h5 class="media-heading">{{post.title }} {% if post.author == user %}
+            <a href="{% url 'tasks:task-view' pk=post.id%}">Edit</a>
+            {% endif %} <br></h5>
+        {{ post.text }}
+        <div><i>Author:</i> {{ post.author.name }}</div>
+        <div><i>Date:</i> {{ post.pub_data }}</div>
+    </div>
+</div>
+<br>
 {% endfor %}
-{% endblock %}
+</html>
+
+

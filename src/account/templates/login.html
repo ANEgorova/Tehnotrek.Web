@@ -3,7 +3,8 @@
 {% block text %}
 <p><b>Welcome, everybody! </b></p>
 <p><b>There is a place where people are trying to be as productive and motivated as they can </b></p>
-Please Log in to use our website!
+<p>Please, log in to use our website!<p>
+
 <form method="post">
     {% csrf_token %}
     {{ form  }}
@@ -12,6 +13,6 @@ Please Log in to use our website!
 
 Do you still not have an account?
 <form method="get" action="../join">
-    <input type="submit" value="Sign up">
+    <input type="submit" value="Join">
 </form>
 {% endblock %}

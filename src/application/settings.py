@@ -11,16 +11,18 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from ConfigParser import ConfigParser
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+config = ConfigParser()
+config.read(os.path.join(BASE_DIR, '../web.conf'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2@%mnoha*th+4*ds@0@*u9am&#_@=ox!n*7lhtzqu-yhw290g_'
+SECRET_KEY = config.get('main', 'SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'news',
     'task',
     'account',
     'core',
@@ -90,18 +91,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
 ]
 
 
@@ -126,9 +127,34 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/home/alyona/Technotrack/collected_static/'
 STATICFILES_DIRS = ('/home/alyona/Technotrack/src/static/',)
 
-IMAGE_URL = '/media/'
-IMAGE_ROOT = '/home/alyona/Technotrack/src/avatars/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/home/alyona/Technotrack/media'
 
 AUTH_USER_MODEL = 'account.User'
-LOGIN_URL = '/users/login/'  # Create "You are not login" page!!!!?????
+LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/tasks/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/home/alyona/Technotrack/src/task/debug.log',
+        },
+    },
+    'loggers': {
+        'task.view': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'CRITICAL',
+            'propagate': True,
+        },
+    },
+}
